@@ -1,1 +1,55 @@
+#include <iostream>
+using namespace std;
+
+class COMPLEX {
+    int real, imag;
+
+public:
+    void read() {
+        cout << "Enter real and imaginary part: ";
+        cin >> real >> imag;
+    }
+
+    void display() {
+        cout << real << " + " << imag << "i" << endl;
+    }
+
+    friend COMPLEX ADD(int a, COMPLEX c2);
+    friend COMPLEX ADD(COMPLEX c1, COMPLEX c2);
+};
+
+COMPLEX ADD(int a, COMPLEX c2) {
+    COMPLEX t;
+    t.real = a + c2.real;
+    t.imag = c2.imag;
+    return t;
+}
+
+COMPLEX ADD(COMPLEX c1, COMPLEX c2) {
+    COMPLEX t;
+    t.real = c1.real + c2.real;
+    t.imag = c1.imag + c2.imag;
+    return t;
+}
+
+int main() {
+    COMPLEX c1, c2, c3, c4;
+    int a;
+
+    cout << "First complex number" << endl;
+    c1.read();
+    cout << "Second complex number" << endl;
+    c2.read();
+    cout << "Enter an integer: ";
+    cin >> a;
+
+    c3 = ADD(a, c2);
+    c4 = ADD(c1, c2);
+
+    cout << "ADD(a,c2) = ";
+    c3.display();
+    cout << "ADD(c1,c2) = ";
+    c4.display();
+    return 0;
+}
 
