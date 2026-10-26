@@ -1,1 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class BankAccount {
+    char name[30];
+    int accno;
+    float balance;
+
+public:
+    void initialize() {
+        cout << "Enter name: ";
+        cin >> name;
+        cout << "Enter account number: ";
+        cin >> accno;
+        cout << "Enter opening balance: ";
+        cin >> balance;
+    }
+
+    void deposit() {
+        float amt;
+        cout << "Enter amount to deposit: ";
+        cin >> amt;
+        balance = balance + amt;
+        cout << "Amount deposited." << endl;
+    }
+
+    void withdraw() {
+        float amt;
+        cout << "Enter amount to withdraw: ";
+        cin >> amt;
+        if (amt > balance)
+            cout << "Insufficient balance!" << endl;
+        else {
+            balance = balance - amt;
+            cout << "Amount withdrawn." << endl;
+        }
+    }
+
+    void display() {
+        cout << "Name: " << name << endl;
+        cout << "Balance: " << balance << endl;
+    }
+};
+
+int main() {
+    BankAccount a;
+    a.initialize();
+    a.deposit();
+    a.withdraw();
+    a.display();
+    return 0;
+}
       
