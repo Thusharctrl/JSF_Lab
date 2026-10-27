@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+class sample {
+    int i;
+    char c;
+    float f;
+
+public:
+    sample() {                      // 1. Default constructor
+        i = 0;
+        c = 'A';
+        f = 0.0;
+        cout << "Default constructor called" << endl;
+    }
+
+    sample(int x, char y, float z) {    // 2. Parameterized constructor
+        i = x;
+        c = y;
+        f = z;
+        cout << "Parameterized constructor called" << endl;
+    }
+
+    sample(int x, char y = 'B') {       // 3. Default argument constructor
+        i = x;
+        c = y;
+        f = 9.9;
+        cout << "Default argument constructor called" << endl;
+    }
+
+    sample(sample &s) {                 // 4. Copy constructor
+        i = s.i;
+        c = s.c;
+        f = s.f;
+        cout << "Copy constructor called" << endl;
+    }
+
+    void display() {
+        cout << "i = " << i << "  c = " << c << "  f = " << f << endl;
+    }
+};
+
+int main() {
+    sample s1;                  // Default
+    s1.display();
+
+    sample s2(10, 'X', 1.5);    // Parameterized
+    s2.display();
+
+    sample s3(20);              // Default argument
+    s3.display();
+
+    sample s4(s2);              // Copy
+    s4.display();
+
+    return 0;
+}
