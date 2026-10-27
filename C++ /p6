@@ -11,9 +11,7 @@ public:
     // Default dynamic constructor - creates an empty string
     STRNG()
     {
-        length = 0;
-        name = new char[1];
-        name[0] = '\0';
+       
     }
 
     // Dynamic constructor - allocates memory as per string length
