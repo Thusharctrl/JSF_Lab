@@ -1,0 +1,83 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+class STRNG
+{
+    int length;
+    char *name;
+
+public:
+    // Default dynamic constructor - creates an empty string
+    STRNG()
+    {
+        length = 0;
+        name = new char[1];
+        name[0] = '\0';
+    }
+
+    // Dynamic constructor - allocates memory as per string length
+    STRNG(const char s[])
+    {
+        length = strlen(s);
+        name = new char[length + 1];
+        strcpy(name, s);
+    }
+
+    // Concatenate two strings
+    void join(STRNG A, STRNG B)
+    {
+        length = A.length + B.length;
+        name = new char[length + 1];
+        strcpy(name, A.name);
+        strcat(name, B.name);
+    }
+
+    // Display object data
+    void display()
+    {
+        cout << "name= " << name << endl;
+    }
+};
+
+int main()
+{
+    STRNG s1("wel");
+    STRNG s2("fare");
+
+    cout << "s1: " << endl;
+    s1.display();
+
+    cout << "s2: " << endl;
+    s2.display();
+
+    STRNG s3;
+    s3.join(s1, s2);
+
+    cout << "s3: " << endl;
+    s3.display();
+
+    STRNG s4("come");
+
+    cout << "s4: " << endl;
+    s4.display();
+
+    STRNG s5;
+    s5.join(s1, s4);
+
+    cout << "s5: " << endl;
+    s5.display();
+
+    STRNG s6("done");
+
+    cout << "s6: " << endl;
+    s6.display();
+
+    STRNG s7;
+    s7.join(s1, s6);
+
+    cout << "s7: " << endl;
+    s7.display();
+
+    return 0;
+}
