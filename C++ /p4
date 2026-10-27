@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+class EMPLOYEE {
+    int eno;
+    char ename[30];
+    float salary;
+
+public:
+    void read() {
+        cout << "Enter employee number: ";
+        cin >> eno;
+        cout << "Enter employee name: ";
+        cin >> ename;
+        cout << "Enter salary: ";
+        cin >> salary;
+    }
+
+    void print() {
+        cout << eno << "\t" << ename << "\t" << salary << endl;
+    }
+};
+
+int main() {
+    EMPLOYEE e[10];
+    int n, i;
+
+    cout << "Enter number of employees: ";
+    cin >> n;
+
+    for (i = 0; i < n; i++) {
+        cout << "Employee " << i + 1 << endl;
+        e[i].read();
+    }
+
+    cout << "\nEno\tEname\tSalary" << endl;
+    for (i = 0; i < n; i++)
+        e[i].print();
+
+    return 0;
+}
