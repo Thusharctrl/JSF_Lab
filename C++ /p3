@@ -1,1 +1,43 @@
+#include <iostream>
+using namespace std;
+
+class Time {
+    int hours, minutes;
+
+public:
+    void read() {
+        cout << "Enter hours and minutes: ";
+        cin >> hours >> minutes;
+    }
+
+    void display() {
+        cout << hours << " hours and " << minutes << " minutes" << endl;
+    }
+
+    void sum(Time t1, Time t2) {
+        minutes = t1.minutes + t2.minutes;
+        hours = minutes / 60;
+        minutes = minutes % 60;
+        hours = hours + t1.hours + t2.hours;
+    }
+};
+
+int main() {
+    Time t1, t2, t3;
+
+    cout << "First time" << endl;
+    t1.read();
+    cout << "Second time" << endl;
+    t2.read();
+
+    t3.sum(t1, t2);
+
+    cout << "Time 1 = ";
+    t1.display();
+    cout << "Time 2 = ";
+    t2.display();
+    cout << "Total = ";
+    t3.display();
+    return 0;
+}
 
