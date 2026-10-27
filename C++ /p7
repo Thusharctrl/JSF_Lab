@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+
+class STUDENT {
+protected:
+    int rollno;
+    char name[30];
+
+public:
+    void readStudent() {
+        cout << "Enter roll number: ";
+        cin >> rollno;
+        cout << "Enter name: ";
+        cin >> name;
+    }
+
+    void showStudent() {
+        cout << "Roll No: " << rollno << endl;
+        cout << "Name: " << name << endl;
+    }
+};
+
+class MEDICAL : public STUDENT {
+    char branch[30];
+
+public:
+    void readMedical() {
+        cout << "Enter medical branch: ";
+        cin >> branch;
+    }
+
+    void showMedical() {
+        showStudent();
+        cout << "Course: MEDICAL" << endl;
+        cout << "Branch: " << branch << endl;
+    }
+};
+
+class ENGINEERING : public STUDENT {
+    int marks;
+
+public:
+    void readEngg() {
+        cout << "Enter total marks: ";
+        cin >> marks;
+    }
+
+    void showEngg() {
+        showStudent();
+        cout << "Course: ENGINEERING" << endl;
+        cout << "Marks: " << marks << endl;
+    }
+};
+
+int main() {
+    MEDICAL m;
+    ENGINEERING e;
+
+    cout << "--- Medical Student ---" << endl;
+    m.readStudent();
+    m.readMedical();
+
+    cout << "--- Engineering Student ---" << endl;
+    e.readStudent();
+    e.readEngg();
+
+    cout << "\n--- Medical Student Details ---" << endl;
+    m.showMedical();
+
+    cout << "\n--- Engineering Student Details ---" << endl;
+    e.showEngg();
+
+    return 0;
+}
