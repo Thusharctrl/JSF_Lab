@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class Complex {
+    int real, imag;
+
+public:
+    void read() {
+        cout << "Enter real and imaginary part: ";
+        cin >> real >> imag;
+    }
+
+    void display() {
+        cout << real << " + " << imag << "i" << endl;
+    }
+
+    Complex operator+(Complex c) {
+        Complex t;
+        t.real = real + c.real;
+        t.imag = imag + c.imag;
+        return t;
+    }
+
+    Complex operator-(Complex c) {
+        Complex t;
+        t.real = real - c.real;
+        t.imag = imag - c.imag;
+        return t;
+    }
+};
+
+int main() {
+    Complex c1, c2, c3, c4;
+
+    cout << "First complex number" << endl;
+    c1.read();
+    cout << "Second complex number" << endl;
+    c2.read();
+
+    c3 = c1 + c2;
+    c4 = c1 - c2;
+
+    cout << "C1 = ";
+    c1.display();
+    cout << "C2 = ";
+    c2.display();
+    cout << "Sum = ";
+    c3.display();
+    cout << "Difference = ";
+    c4.display();
+
+    return 0;
+}
