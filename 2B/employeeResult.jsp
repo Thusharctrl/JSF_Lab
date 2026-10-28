@@ -22,8 +22,10 @@
             } catch (Exception e) {
                 errors += "<li>Age must be a valid number.</li>";
             }
+
             if (!"HR".equals(dept) && !"IT".equals(dept) && !"Finance".equals(dept) && !"Sales".equals(dept))
-                     errors += "<li>Please select a valid department.</li>";
+                errors += "<li>Please select a valid department.</li>";
+
             if (email == null || !email.matches("[\\w.+-]+@[\\w.-]+\\.[A-Za-z]{2,}"))
                 errors += "<li>Enter a valid email address.</li>";
         %>
@@ -34,12 +36,16 @@
         <ul><%=errors%></ul>
         <%
             } else {
+                int age = Integer.parseInt(a);
+                int birthYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR) - age;
+                String details = name + " - " + dept;
+                String formattedEmail = email.toLowerCase();
         %>
         <h3>All details are valid!</h3>
         <br>Employee ID: <%= id %><br>
-        Name: <%= name %><br>
-        Department: <%= dept %><br>
-        Formatted Email: <%= email %>
+        Name and Department: <%= details %><br>
+        Birth Year: <%= birthYear %><br>
+        Formatted Email: <%= formattedEmail %>
         <%
             }
         %>
