@@ -22,7 +22,8 @@
             } catch (Exception e) {
                 errors += "<li>Age must be a valid number.</li>";
             }
-
+            if (!"HR".equals(dept) && !"IT".equals(dept) && !"Finance".equals(dept) && !"Sales".equals(dept))
+                     errors += "<li>Please select a valid department.</li>";
             if (email == null || !email.matches("[\\w.+-]+@[\\w.-]+\\.[A-Za-z]{2,}"))
                 errors += "<li>Enter a valid email address.</li>";
         %>
