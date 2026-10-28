@@ -39,13 +39,13 @@
                 int age = Integer.parseInt(a);
                 int birthYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR) - age;
                 String details = name + " - " + dept;
-                String formattedEmail = email.toLowerCase();
+                
         %>
         <h3>All details are valid!</h3>
         <br>Employee ID: <%= id %><br>
         Name and Department: <%= details %><br>
         Birth Year: <%= birthYear %><br>
-        Formatted Email: <%= formattedEmail %>
+        Email: <%= email%>
         <%
             }
         %>
