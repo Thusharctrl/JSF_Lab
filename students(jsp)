@@ -1,0 +1,132 @@
+<%@ page import="java.sql.*" %>
+<html>
+<body>
+
+<h2>Student CRUD Operations</h2>
+
+<%
+String url = "jdbc:mysql://localhost:3306/student?serverTimezone=UTC";
+String user = "student";
+String pass = "student";
+String action = request.getParameter("action");
+
+if (action != null) {
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+
+        try (Connection con =
+                 DriverManager.getConnection(url, user, pass)) {
+
+            if ("add".equals(action)) {
+                try (PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO students VALUES(?,?,?,?)")) {
+                    ps.setInt(1, Integer.parseInt(
+                        request.getParameter("roll_no")));
+                    ps.setString(2, request.getParameter("name"));
+                    ps.setString(3, request.getParameter("email"));
+                    ps.setInt(4, Integer.parseInt(
+                        request.getParameter("age")));
+                    ps.executeUpdate();
+                    out.println("Student added.<br>");
+                }
+            }
+
+            else if ("update".equals(action)) {
+                try (PreparedStatement ps = con.prepareStatement(
+                    "UPDATE students SET name=?, email=?, age=? WHERE roll_no=?")) {
+                    ps.setString(1, request.getParameter("name"));
+                    ps.setString(2, request.getParameter("email"));
+                    ps.setInt(3, Integer.parseInt(
+                        request.getParameter("age")));
+                    ps.setInt(4, Integer.parseInt(
+                        request.getParameter("roll_no")));
+                    int n = ps.executeUpdate();
+                    out.println(n > 0 ? "Student updated.<br>"
+                                      : "Student not found.<br>");
+                }
+            }
+
+            else if ("delete".equals(action)) {
+                try (PreparedStatement ps = con.prepareStatement(
+                    "DELETE FROM students WHERE roll_no=?")) {
+                    ps.setInt(1, Integer.parseInt(
+                        request.getParameter("roll_no")));
+                    int n = ps.executeUpdate();
+                    out.println(n > 0 ? "Student deleted.<br>"
+                                      : "Student not found.<br>");
+                }
+            }
+        }
+    } catch (Exception e) {
+        out.println("Error: " + e.getMessage() + "<br>");
+    }
+}
+%>
+
+<h3>Add Student</h3>
+<form method="post">
+    <input type="hidden" name="action" value="add">
+    Roll No: <input type="number" name="roll_no" required><br>
+    Name: <input type="text" name="name" required><br>
+    Email: <input type="email" name="email" required><br>
+    Age: <input type="number" name="age" required><br>
+    <input type="submit" value="Add Student">
+</form>
+
+<h3>Update Student</h3>
+<form method="post">
+    <input type="hidden" name="action" value="update">
+    Roll No: <input type="number" name="roll_no" required><br>
+    Name: <input type="text" name="name" required><br>
+    Email: <input type="email" name="email" required><br>
+    Age: <input type="number" name="age" required><br>
+    <input type="submit" value="Update Student">
+</form>
+
+<h3>Delete Student</h3>
+<form method="post">
+    <input type="hidden" name="action" value="delete">
+    Roll No: <input type="number" name="roll_no" required><br>
+    <input type="submit" value="Delete Student">
+</form>
+
+<h3>Student Records</h3>
+<%
+try {
+    Class.forName("com.mysql.jdbc.Driver");
+
+    try (Connection con = DriverManager.getConnection(url, user, pass);
+         Statement st = con.createStatement();
+         ResultSet rs = st.executeQuery("SELECT * FROM students")) {
+
+        while (rs.next()) {
+            out.println("Roll No: " + rs.getInt("roll_no") + "<br>");
+            out.println("Name: " + rs.getString("name") + "<br>");
+            out.println("Email: " + rs.getString("email") + "<br>");
+            out.println("Age: " + rs.getInt("age") + "<br><hr>");
+        }
+    }
+} catch (Exception e) {
+    out.println("Error: " + e.getMessage());
+}
+%>
+
+</body>
+</html>
+
+
+
+CREATE DATABASE student;
+
+USE student;
+
+CREATE TABLE students (
+    roll_no INT PRIMARY KEY,
+    name VARCHAR(150),
+    email VARCHAR(150),
+    age INT
+);
+
+DESC students;
+
+SELECT * FROM students;
