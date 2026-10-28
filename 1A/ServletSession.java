@@ -17,7 +17,9 @@ public class ServletSession extends HttpServlet {
         String name = req.getParameter("username");
         String password = req.getParameter("password");
         PrintWriter out = res.getWriter();
-        out.println("Name: " + name);
-        out.println("Password: " + password);
+        out.println("<html><body><h2>Submitted Data</h2>");
+        out.println("Name: " + name + "<br>");
+        out.println("Password: " + password + "<br>");
+        out.println("</body></html>");
     }
 }
