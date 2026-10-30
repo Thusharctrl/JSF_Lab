@@ -11,7 +11,7 @@ public class StudentDAO {
     String pass = "root123";
 
     Connection getConnection() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection(url, user, pass);
     }
 
