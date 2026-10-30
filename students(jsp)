@@ -6,8 +6,8 @@
 
 <%
 String url = "jdbc:mysql://localhost:3306/student?serverTimezone=UTC";
-String user = "student";
-String pass = "student";
+String user = "root";
+String pass = "root123";
 String action = request.getParameter("action");
 
 if (action != null) {
@@ -19,7 +19,7 @@ if (action != null) {
 
             if ("add".equals(action)) {
                 try (PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO students VALUES(?,?,?,?)")) {
+                    "INSERT INTO student VALUES(?,?,?,?)")) {
                     ps.setInt(1, Integer.parseInt(
                         request.getParameter("roll_no")));
                     ps.setString(2, request.getParameter("name"));
@@ -33,7 +33,7 @@ if (action != null) {
 
             else if ("update".equals(action)) {
                 try (PreparedStatement ps = con.prepareStatement(
-                    "UPDATE students SET name=?, email=?, age=? WHERE roll_no=?")) {
+                    "UPDATE student SET name=?, email=?, age=? WHERE roll_no=?")) {
                     ps.setString(1, request.getParameter("name"));
                     ps.setString(2, request.getParameter("email"));
                     ps.setInt(3, Integer.parseInt(
@@ -48,7 +48,7 @@ if (action != null) {
 
             else if ("delete".equals(action)) {
                 try (PreparedStatement ps = con.prepareStatement(
-                    "DELETE FROM students WHERE roll_no=?")) {
+                    "DELETE FROM student WHERE roll_no=?")) {
                     ps.setInt(1, Integer.parseInt(
                         request.getParameter("roll_no")));
                     int n = ps.executeUpdate();
@@ -97,7 +97,7 @@ try {
 
     try (Connection con = DriverManager.getConnection(url, user, pass);
          Statement st = con.createStatement();
-         ResultSet rs = st.executeQuery("SELECT * FROM students")) {
+         ResultSet rs = st.executeQuery("SELECT * FROM student")) {
 
         while (rs.next()) {
             out.println("Roll No: " + rs.getInt("roll_no") + "<br>");
@@ -114,19 +114,3 @@ try {
 </body>
 </html>
 
-//SQL
-
-CREATE DATABASE student;
-
-USE student;
-
-CREATE TABLE students (
-    roll_no INT PRIMARY KEY,
-    name VARCHAR(150),
-    email VARCHAR(150),
-    age INT
-);
-
-DESC students;
-
-SELECT * FROM students;
